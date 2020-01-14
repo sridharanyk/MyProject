@@ -22,8 +22,6 @@ public class Project {
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		TakesScreenshot tk =(TakesScreenshot)driver;
 		
-		
-		
 		driver.navigate().to("https://www.altitudelifehacks.com/");
 		driver.manage().window().maximize();
 		
