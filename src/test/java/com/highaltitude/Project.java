@@ -12,9 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Project {
+public class Project extends Project1 {
 	
-	public static void main(String[] args) throws InterruptedException, IOException {
+	public static void main(String[] args) throws Throwable {
 		
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\GT Sanatorium\\Desktop\\Sridharan Project\\Project\\ChromeDriver\\chromedriver.exe");
 		
@@ -37,8 +37,9 @@ public class Project {
 		File d1 = new File("C:\\Users\\GT Sanatorium\\Desktop\\Sridharan Project1\\LoginPage.png");
 		FileUtils.copyFile(s1, d1);
 		
-		driver.findElement(By.id("CustomerEmail")).sendKeys("sridharanyk@gmail.com");
+		driver.findElement(By.id("CustomerEmail")).sendKeys(getData(1,0));
 		
+		Thread.sleep(3000);
 		driver.findElement(By.id("CustomerPassword")).sendKeys("1234567890");
 		
 		WebElement a = driver.findElement(By.className("btn"));
