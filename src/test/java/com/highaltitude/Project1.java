@@ -10,7 +10,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class Project1 {
+class Project1 {
 	
 	public static String getData(int rowNo, int cellNo) throws Throwable {
 		

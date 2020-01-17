@@ -1,9 +1,16 @@
 package com.highaltitude;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -12,7 +19,38 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Project extends Project1 {
+class Project2 {
+	
+	public static String getData(int rowNo, int cellNo) throws Throwable {
+		
+		String v = null;
+		
+		File loc = new File("C:\\Users\\GT Sanatorium\\Desktop\\Sridharan Project\\Project\\DataType\\Project Excel.xlsx");
+		
+		FileInputStream s = new FileInputStream(loc);
+		Workbook w = new XSSFWorkbook(s);
+		
+		Sheet s1 = w.getSheet("Sheet1");
+		Row r = s1.getRow(rowNo);
+		Cell c = r.getCell(cellNo);
+		int type = c.getCellType();
+		
+		if (type==1) {
+			
+			 v = c.getStringCellValue();
+			
+		} 
+		else {
+			double num = c.getNumericCellValue();
+			long l = (long)num;
+			v=String.valueOf(l);
+
+		}
+		return v;
+	}
+}
+
+public class Project extends Project2 {
 	
 	public static void main(String[] args) throws Throwable {
 		
@@ -40,7 +78,7 @@ public class Project extends Project1 {
 		driver.findElement(By.id("CustomerEmail")).sendKeys(getData(1,0));
 		
 		Thread.sleep(3000);
-		driver.findElement(By.id("CustomerPassword")).sendKeys("1234567890");
+		driver.findElement(By.id("CustomerPassword")).sendKeys(getData(2,0));
 		
 		WebElement a = driver.findElement(By.className("btn"));
 		js.executeScript("arguments[0].click()",a);
@@ -64,6 +102,12 @@ public class Project extends Project1 {
 		File s3 = tk.getScreenshotAs(OutputType.FILE);
 		File d3 = new File("C:\\Users\\GT Sanatorium\\Desktop\\Sridharan Project1\\CheckoutPage.png");
 		FileUtils.copyFile(s3, d3);
+		
+		driver.findElement(By.xpath("(//button[@class='btn'])[1]")).click();
+		
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+		
+		
 	}
 	
 	
